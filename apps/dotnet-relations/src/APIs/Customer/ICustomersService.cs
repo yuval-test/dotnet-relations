@@ -114,6 +114,7 @@ public interface ICustomersService
     /// Get one customer
     /// </summary>
     public Task<Customer> Customer(CustomerWhereUniqueInput uniqueId);
+    public Task<string> PurgeCustomer(string data);
 
     /// <summary>
     /// Update one customer
