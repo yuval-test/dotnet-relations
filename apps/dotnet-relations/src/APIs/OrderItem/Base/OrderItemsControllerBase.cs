@@ -78,10 +78,10 @@ public abstract class OrderItemsControllerBase : ControllerBase
     }
 
     /// <summary>
-    /// Get a Customer record for OrderItem
+    /// Get a CustomerItem record for OrderItem
     /// </summary>
     [HttpGet("{Id}/customers")]
-    public async Task<ActionResult<List<Customer>>> GetCustomer(
+    public async Task<ActionResult<List<Customer>>> GetCustomerItem(
         [FromRoute()] OrderItemWhereUniqueInput uniqueId
     )
     {

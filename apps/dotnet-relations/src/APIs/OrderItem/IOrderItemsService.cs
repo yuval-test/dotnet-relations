@@ -26,9 +26,9 @@ public interface IOrderItemsService
     public Task<OrderItem> OrderItem(OrderItemWhereUniqueInput uniqueId);
 
     /// <summary>
-    /// Get a Customer record for OrderItem
+    /// Get a CustomerItem record for OrderItem
     /// </summary>
-    public Task<Customer> GetCustomer(OrderItemWhereUniqueInput uniqueId);
+    public Task<Customer> GetCustomerItem(OrderItemWhereUniqueInput uniqueId);
 
     /// <summary>
     /// Get a Order record for OrderItem

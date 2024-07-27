@@ -35,10 +35,10 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
         {
             orderItem.Id = createDto.Id;
         }
-        if (createDto.Customer != null)
+        if (createDto.CustomerItem != null)
         {
-            orderItem.Customer = await _context
-                .Customers.Where(customer => createDto.Customer.Id == customer.Id)
+            orderItem.CustomerItem = await _context
+                .Customers.Where(customer => createDto.CustomerItem.Id == customer.Id)
                 .FirstOrDefaultAsync();
         }
 
@@ -83,7 +83,7 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
     public async Task<List<OrderItem>> OrderItems(OrderItemFindManyArgs findManyArgs)
     {
         var orderItems = await _context
-            .OrderItems.Include(x => x.Customer)
+            .OrderItems.Include(x => x.CustomerItem)
             .Include(x => x.Order)
             .ApplyWhere(findManyArgs.Where)
             .ApplySkip(findManyArgs.Skip)
@@ -111,19 +111,19 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
     }
 
     /// <summary>
-    /// Get a Customer record for OrderItem
+    /// Get a CustomerItem record for OrderItem
     /// </summary>
-    public async Task<Customer> GetCustomer(OrderItemWhereUniqueInput uniqueId)
+    public async Task<Customer> GetCustomerItem(OrderItemWhereUniqueInput uniqueId)
     {
         var orderItem = await _context
             .OrderItems.Where(orderItem => orderItem.Id == uniqueId.Id)
-            .Include(orderItem => orderItem.Customer)
+            .Include(orderItem => orderItem.CustomerItem)
             .FirstOrDefaultAsync();
         if (orderItem == null)
         {
             throw new NotFoundException();
         }
-        return orderItem.Customer.ToDto();
+        return orderItem.CustomerItem.ToDto();
     }
 
     /// <summary>
