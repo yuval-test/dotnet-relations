@@ -33,6 +33,10 @@ public static class OrdersExtensions
         {
             order.UpdatedAt = updateDto.UpdatedAt.Value;
         }
+        if (updateDto.Customer != null)
+        {
+            order.Customer = updateDto.Customer;
+        }
 
         return order;
     }

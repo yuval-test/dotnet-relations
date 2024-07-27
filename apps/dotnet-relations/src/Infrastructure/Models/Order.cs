@@ -18,8 +18,8 @@ public class OrderDbModel
 
     public DateTime? Date { get; set; }
 
-    public string? CustomerId { get; set; }
+    public string CustomerId { get; set; }
 
     [ForeignKey(nameof(CustomerId))]
-    public CustomerDbModel? Customer { get; set; } = null;
+    public CustomerDbModel Customer { get; set; } = null;
 }
