@@ -111,9 +111,9 @@ public interface ICustomersService
     public Task DeleteCustomer(CustomerWhereUniqueInput uniqueId);
 
     /// <summary>
-    /// Find many customers
+    /// Get one customer
     /// </summary>
-    public Task<List<Customer>> Customers(CustomerFindManyArgs findManyArgs);
+    public Task<Customer> Customer(CustomerWhereUniqueInput uniqueId);
 
     /// <summary>
     /// Update one customer

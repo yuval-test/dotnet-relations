@@ -417,19 +417,20 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
-    /// Find many customers
+    /// Get one customer
     /// </summary>
-    public async Task<List<Customer>> Customers(CustomerFindManyArgs findManyArgs)
+    public async Task<Customer> Customer(CustomerWhereUniqueInput uniqueId)
     {
-        var customers = await _context
-            .Customers.Include(x => x.Orders)
-            .Include(x => x.OrderItems)
-            .ApplyWhere(findManyArgs.Where)
-            .ApplySkip(findManyArgs.Skip)
-            .ApplyTake(findManyArgs.Take)
-            .ApplyOrderBy(findManyArgs.SortBy)
-            .ToListAsync();
-        return customers.ConvertAll(customer => customer.ToDto());
+        var customers = await this.Customers(
+            new CustomerFindManyArgs { Where = new CustomerWhereInput { Id = uniqueId.Id } }
+        );
+        var customer = customers.FirstOrDefault();
+        if (customer == null)
+        {
+            throw new NotFoundException();
+        }
+
+        return customer;
     }
 
     /// <summary>

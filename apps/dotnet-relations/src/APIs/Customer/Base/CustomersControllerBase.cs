@@ -304,14 +304,21 @@ public abstract class CustomersControllerBase : ControllerBase
     }
 
     /// <summary>
-    /// Find many customers
+    /// Get one customer
     /// </summary>
-    [HttpGet()]
-    public async Task<ActionResult<List<Customer>>> Customers(
-        [FromQuery()] CustomerFindManyArgs filter
+    [HttpGet("{Id}")]
+    public async Task<ActionResult<Customer>> Customer(
+        [FromRoute()] CustomerWhereUniqueInput uniqueId
     )
     {
-        return Ok(await _service.Customers(filter));
+        try
+        {
+            return await _service.Customer(uniqueId);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     /// <summary>
