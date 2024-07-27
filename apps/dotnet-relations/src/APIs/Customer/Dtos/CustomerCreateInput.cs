@@ -16,5 +16,5 @@ public class CustomerCreateInput
 
     public List<OrderItem>? OrderItems { get; set; }
 
-    public OrderItem? AnotherOrderItem { get; set; }
+    public List<OrderItem>? AnotherOrderItem { get; set; }
 }

@@ -16,5 +16,5 @@ public class Customer
 
     public List<string>? OrderItems { get; set; }
 
-    public string? AnotherOrderItem { get; set; }
+    public List<string>? AnotherOrderItem { get; set; }
 }

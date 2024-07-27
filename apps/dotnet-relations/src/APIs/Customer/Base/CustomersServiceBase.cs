@@ -65,6 +65,40 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
+    /// Connect multiple AnotherOrderItem records to customer
+    /// </summary>
+    public async Task ConnectAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    )
+    {
+        var customer = await _context
+            .Customers.Include(x => x.OrderItems)
+            .FirstOrDefaultAsync(x => x.Id == uniqueId.Id);
+        if (customer == null)
+        {
+            throw new NotFoundException();
+        }
+
+        var orderItems = await _context
+            .OrderItems.Where(t => orderItemsId.Select(x => x.Id).Contains(t.Id))
+            .ToListAsync();
+        if (orderItems.Count == 0)
+        {
+            throw new NotFoundException();
+        }
+
+        var orderItemsToConnect = orderItems.Except(customer.OrderItems);
+
+        foreach (var orderItem in orderItemsToConnect)
+        {
+            customer.OrderItems.Add(orderItem);
+        }
+
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
     /// Connect multiple OrderItems records to customer
     /// </summary>
     public async Task ConnectOrderItems(
@@ -133,6 +167,33 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
+    /// Disconnect multiple AnotherOrderItem records from customer
+    /// </summary>
+    public async Task DisconnectAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    )
+    {
+        var customer = await _context
+            .Customers.Include(x => x.OrderItems)
+            .FirstOrDefaultAsync(x => x.Id == uniqueId.Id);
+        if (customer == null)
+        {
+            throw new NotFoundException();
+        }
+
+        var orderItems = await _context
+            .OrderItems.Where(t => orderItemsId.Select(x => x.Id).Contains(t.Id))
+            .ToListAsync();
+
+        foreach (var orderItem in orderItems)
+        {
+            customer.OrderItems?.Remove(orderItem);
+        }
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
     /// Disconnect multiple OrderItems records from customer
     /// </summary>
     public async Task DisconnectOrderItems(
@@ -187,6 +248,25 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
+    /// Find multiple AnotherOrderItem records for customer
+    /// </summary>
+    public async Task<List<OrderItem>> FindAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemFindManyArgs customerFindManyArgs
+    )
+    {
+        var orderItems = await _context
+            .OrderItems.Where(m => m.CustomerId == uniqueId.Id)
+            .ApplyWhere(customerFindManyArgs.Where)
+            .ApplySkip(customerFindManyArgs.Skip)
+            .ApplyTake(customerFindManyArgs.Take)
+            .ApplyOrderBy(customerFindManyArgs.SortBy)
+            .ToListAsync();
+
+        return orderItems.Select(x => x.ToDto()).ToList();
+    }
+
+    /// <summary>
     /// Find multiple OrderItems records for customer
     /// </summary>
     public async Task<List<OrderItem>> FindOrderItems(
@@ -225,22 +305,6 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
-    /// Get a AnotherOrderItem record for customer
-    /// </summary>
-    public async Task<OrderItem> GetAnotherOrderItem(CustomerWhereUniqueInput uniqueId)
-    {
-        var customer = await _context
-            .Customers.Where(customer => customer.Id == uniqueId.Id)
-            .Include(customer => customer.OrderItems)
-            .FirstOrDefaultAsync();
-        if (customer == null)
-        {
-            throw new NotFoundException();
-        }
-        return customer.OrderItems.ToDto();
-    }
-
-    /// <summary>
     /// Meta data about customer records
     /// </summary>
     public async Task<MetadataDto> CustomersMeta(CustomerFindManyArgs findManyArgs)
@@ -248,6 +312,35 @@ public abstract class CustomersServiceBase : ICustomersService
         var count = await _context.Customers.ApplyWhere(findManyArgs.Where).CountAsync();
 
         return new MetadataDto { Count = count };
+    }
+
+    /// <summary>
+    /// Update multiple AnotherOrderItem records for customer
+    /// </summary>
+    public async Task UpdateAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    )
+    {
+        var customer = await _context
+            .Customers.Include(t => t.OrderItems)
+            .FirstOrDefaultAsync(x => x.Id == uniqueId.Id);
+        if (customer == null)
+        {
+            throw new NotFoundException();
+        }
+
+        var orderItems = await _context
+            .OrderItems.Where(a => orderItemsId.Select(x => x.Id).Contains(a.Id))
+            .ToListAsync();
+
+        if (orderItems.Count == 0)
+        {
+            throw new NotFoundException();
+        }
+
+        customer.OrderItems = orderItems;
+        await _context.SaveChangesAsync();
     }
 
     /// <summary>

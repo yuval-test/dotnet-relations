@@ -11,6 +11,14 @@ public interface ICustomersService
     public Task<Customer> CreateCustomer(CustomerCreateInput customer);
 
     /// <summary>
+    /// Connect multiple AnotherOrderItem records to customer
+    /// </summary>
+    public Task ConnectAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    );
+
+    /// <summary>
     /// Connect multiple OrderItems records to customer
     /// </summary>
     public Task ConnectOrderItems(
@@ -22,6 +30,14 @@ public interface ICustomersService
     /// Connect multiple Orders records to customer
     /// </summary>
     public Task ConnectOrders(CustomerWhereUniqueInput uniqueId, OrderWhereUniqueInput[] ordersId);
+
+    /// <summary>
+    /// Disconnect multiple AnotherOrderItem records from customer
+    /// </summary>
+    public Task DisconnectAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    );
 
     /// <summary>
     /// Disconnect multiple OrderItems records from customer
@@ -37,6 +53,14 @@ public interface ICustomersService
     public Task DisconnectOrders(
         CustomerWhereUniqueInput uniqueId,
         OrderWhereUniqueInput[] ordersId
+    );
+
+    /// <summary>
+    /// Find multiple AnotherOrderItem records for customer
+    /// </summary>
+    public Task<List<OrderItem>> FindAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemFindManyArgs OrderItemFindManyArgs
     );
 
     /// <summary>
@@ -56,14 +80,17 @@ public interface ICustomersService
     );
 
     /// <summary>
-    /// Get a AnotherOrderItem record for customer
-    /// </summary>
-    public Task<OrderItem> GetAnotherOrderItem(CustomerWhereUniqueInput uniqueId);
-
-    /// <summary>
     /// Meta data about customer records
     /// </summary>
     public Task<MetadataDto> CustomersMeta(CustomerFindManyArgs findManyArgs);
+
+    /// <summary>
+    /// Update multiple AnotherOrderItem records for customer
+    /// </summary>
+    public Task UpdateAnotherOrderItem(
+        CustomerWhereUniqueInput uniqueId,
+        OrderItemWhereUniqueInput[] orderItemsId
+    );
 
     /// <summary>
     /// Update multiple OrderItems records for customer

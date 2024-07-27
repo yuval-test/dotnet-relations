@@ -26,5 +26,5 @@ public class CustomerDbModel
 
     public List<OrderItemDbModel>? OrderItems { get; set; } = new List<OrderItemDbModel>();
 
-    public OrderItemDbModel? AnotherOrderItem { get; set; } = null;
+    public List<OrderItemDbModel>? AnotherOrderItem { get; set; } = new List<OrderItemDbModel>();
 }
