@@ -10,5 +10,5 @@ public class OrderCreateInput
 
     public DateTime? Date { get; set; }
 
-    public Customer? Customer { get; set; }
+    public Customer Customer { get; set; }
 }
