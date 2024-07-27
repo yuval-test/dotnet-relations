@@ -35,6 +35,13 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
         {
             orderItem.Id = createDto.Id;
         }
+        if (createDto.Customer != null)
+        {
+            orderItem.Customer = await _context
+                .Customers.Where(customer => createDto.Customer.Id == customer.Id)
+                .FirstOrDefaultAsync();
+        }
+
         if (createDto.Order != null)
         {
             orderItem.Order = await _context
@@ -76,7 +83,8 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
     public async Task<List<OrderItem>> OrderItems(OrderItemFindManyArgs findManyArgs)
     {
         var orderItems = await _context
-            .OrderItems.Include(x => x.Order)
+            .OrderItems.Include(x => x.Customer)
+            .Include(x => x.Order)
             .ApplyWhere(findManyArgs.Where)
             .ApplySkip(findManyArgs.Skip)
             .ApplyTake(findManyArgs.Take)
@@ -100,6 +108,22 @@ public abstract class OrderItemsServiceBase : IOrderItemsService
         }
 
         return orderItem;
+    }
+
+    /// <summary>
+    /// Get a Customer record for OrderItem
+    /// </summary>
+    public async Task<Customer> GetCustomer(OrderItemWhereUniqueInput uniqueId)
+    {
+        var orderItem = await _context
+            .OrderItems.Where(orderItem => orderItem.Id == uniqueId.Id)
+            .Include(orderItem => orderItem.Customer)
+            .FirstOrDefaultAsync();
+        if (orderItem == null)
+        {
+            throw new NotFoundException();
+        }
+        return orderItem.Customer.ToDto();
     }
 
     /// <summary>

@@ -15,6 +15,8 @@ public static class OrderItemsExtensions
             Order = model.OrderId,
             Quantity = model.Quantity,
             Price = model.Price,
+            Customer = model.CustomerId,
+            AnotherCustomer = model.AnotherCustomerId,
         };
     }
 
@@ -42,6 +44,14 @@ public static class OrderItemsExtensions
         if (updateDto.Order != null)
         {
             orderItem.Order = updateDto.Order;
+        }
+        if (updateDto.Customer != null)
+        {
+            orderItem.Customer = updateDto.Customer;
+        }
+        if (updateDto.AnotherCustomer != null)
+        {
+            orderItem.AnotherCustomer = updateDto.AnotherCustomer;
         }
 
         return orderItem;
