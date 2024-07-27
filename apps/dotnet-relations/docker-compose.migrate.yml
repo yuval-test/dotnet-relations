@@ -1,0 +1,10 @@
+services:
+  migrate:
+    build:
+      context: ./src
+    entrypoint: sh
+    command: -c './DbMigrationsBundle --connection "$${MIGRATION_CONNECTION}"'
+    environment:
+      MIGRATION_CONNECTION:
+        Data Source=db,1433;Initial Catalog=my-service-db;User
+        Id=sa;Password=SqlAdminChangeMe1234!;TrustServerCertificate=true;
