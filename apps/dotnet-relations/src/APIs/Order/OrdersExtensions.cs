@@ -22,7 +22,7 @@ public static class OrdersExtensions
         OrderWhereUniqueInput uniqueId
     )
     {
-        var order = new OrderDbModel { Id = uniqueId.Id };
+        var order = new OrderDbModel { Id = uniqueId.Id, Date = updateDto.Date };
 
         // map required fields
         if (updateDto.CreatedAt != null)
@@ -32,10 +32,6 @@ public static class OrdersExtensions
         if (updateDto.UpdatedAt != null)
         {
             order.UpdatedAt = updateDto.UpdatedAt.Value;
-        }
-        if (updateDto.Date != null)
-        {
-            order.Date = updateDto.Date.Value;
         }
         if (updateDto.Customer != null)
         {
