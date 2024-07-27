@@ -321,6 +321,12 @@ public abstract class CustomersControllerBase : ControllerBase
         }
     }
 
+    [HttpDelete("{Id}/purge-customer")]
+    public async Task<string> PurgeCustomer([FromBody()] string data)
+    {
+        return await _service.PurgeCustomer(data);
+    }
+
     /// <summary>
     /// Update one customer
     /// </summary>

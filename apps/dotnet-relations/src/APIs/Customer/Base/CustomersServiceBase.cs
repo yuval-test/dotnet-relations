@@ -433,6 +433,11 @@ public abstract class CustomersServiceBase : ICustomersService
         return customer;
     }
 
+    public async Task<string> PurgeCustomer(string data)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// Update one customer
     /// </summary>
