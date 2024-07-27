@@ -14,6 +14,7 @@ public static class OrdersExtensions
             UpdatedAt = model.UpdatedAt,
             Date = model.Date,
             Customer = model.CustomerId,
+            OrderItems = model.OrderItems?.Select(x => x.Id).ToList(),
         };
     }
 

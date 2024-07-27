@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotnetRelations.Infrastructure.Models;
 
-[Table("Customers")]
-public class CustomerDbModel
+[Table("OrderItems")]
+public class OrderItemDbModel
 {
     [Key()]
     [Required()]
@@ -16,11 +16,14 @@ public class CustomerDbModel
     [Required()]
     public DateTime UpdatedAt { get; set; }
 
-    [StringLength(1000)]
-    public string? Name { get; set; }
+    public string? OrderId { get; set; }
 
-    [StringLength(1000)]
-    public string? Phone { get; set; }
+    [ForeignKey(nameof(OrderId))]
+    public OrderDbModel? Order { get; set; } = null;
 
-    public List<OrderDbModel> Orders { get; set; } = new List<OrderDbModel>();
+    [Range(-999999999, 999999999)]
+    public int? Quantity { get; set; }
+
+    [Range(-999999999, 999999999)]
+    public double? Price { get; set; }
 }

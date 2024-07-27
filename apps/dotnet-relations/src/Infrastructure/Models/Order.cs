@@ -22,4 +22,6 @@ public class OrderDbModel
 
     [ForeignKey(nameof(CustomerId))]
     public CustomerDbModel Customer { get; set; } = null;
+
+    public List<OrderItemDbModel>? OrderItems { get; set; } = new List<OrderItemDbModel>();
 }

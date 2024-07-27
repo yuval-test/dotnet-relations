@@ -1,6 +1,6 @@
 namespace DotnetRelations.APIs.Dtos;
 
-public class OrderCreateInput
+public class OrderItemCreateInput
 {
     public string? Id { get; set; }
 
@@ -8,9 +8,9 @@ public class OrderCreateInput
 
     public DateTime UpdatedAt { get; set; }
 
-    public DateTime? Date { get; set; }
+    public Order? Order { get; set; }
 
-    public Customer Customer { get; set; }
+    public int? Quantity { get; set; }
 
-    public List<OrderItem>? OrderItems { get; set; }
+    public double? Price { get; set; }
 }
