@@ -23,12 +23,7 @@ public static class CustomersExtensions
         CustomerWhereUniqueInput uniqueId
     )
     {
-        var customer = new CustomerDbModel
-        {
-            Id = uniqueId.Id,
-            Name = updateDto.Name,
-            Phone = updateDto.Phone
-        };
+        var customer = new CustomerDbModel { Id = uniqueId.Id };
 
         // map required fields
         if (updateDto.CreatedAt != null)
@@ -38,6 +33,18 @@ public static class CustomersExtensions
         if (updateDto.UpdatedAt != null)
         {
             customer.UpdatedAt = updateDto.UpdatedAt.Value;
+        }
+        if (updateDto.Name != null)
+        {
+            customer.Name = updateDto.Name;
+        }
+        if (updateDto.Phone != null)
+        {
+            customer.Phone = updateDto.Phone;
+        }
+        if (updateDto.Orders != null)
+        {
+            customer.Orders = updateDto.Orders.Value;
         }
 
         return customer;
