@@ -26,4 +26,14 @@ public class OrderItemDbModel
 
     [Range(-999999999, 999999999)]
     public double? Price { get; set; }
+
+    public string CustomerId { get; set; }
+
+    [ForeignKey(nameof(CustomerId))]
+    public CustomerDbModel Customer { get; set; } = null;
+
+    public string? AnotherCustomerId { get; set; }
+
+    [ForeignKey(nameof(AnotherCustomerId))]
+    public CustomerDbModel? AnotherCustomer { get; set; } = null;
 }

@@ -13,4 +13,8 @@ public class CustomerWhereInput
     public string? Phone { get; set; }
 
     public List<string>? Orders { get; set; }
+
+    public List<string>? OrderItems { get; set; }
+
+    public List<string>? AnotherOrderItem { get; set; }
 }

@@ -15,6 +15,8 @@ public static class CustomersExtensions
             Name = model.Name,
             Phone = model.Phone,
             Orders = model.Orders?.Select(x => x.Id).ToList(),
+            OrderItems = model.OrderItems?.Select(x => x.Id).ToList(),
+            AnotherOrderItem = model.OrderItems?.Select(x => x.Id).ToList(),
         };
     }
 
