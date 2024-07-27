@@ -209,7 +209,7 @@ public abstract class CustomersServiceBase : ICustomersService
     /// </summary>
     public async Task<Customer> Customer(CustomerWhereUniqueInput uniqueId)
     {
-        var customers = await this.customers(
+        var customers = await this.Customers(
             new CustomerFindManyArgs { Where = new CustomerWhereInput { Id = uniqueId.Id } }
         );
         var customer = customers.FirstOrDefault();

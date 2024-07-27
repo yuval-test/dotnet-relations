@@ -10,5 +10,5 @@ public class Order
 
     public DateTime? Date { get; set; }
 
-    public string? Customer { get; set; }
+    public string Customer { get; set; }
 }
