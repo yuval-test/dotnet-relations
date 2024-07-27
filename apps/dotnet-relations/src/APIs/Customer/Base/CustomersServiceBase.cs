@@ -433,23 +433,6 @@ public abstract class CustomersServiceBase : ICustomersService
     }
 
     /// <summary>
-    /// Get one customer
-    /// </summary>
-    public async Task<Customer> Customer(CustomerWhereUniqueInput uniqueId)
-    {
-        var customers = await this.Customers(
-            new CustomerFindManyArgs { Where = new CustomerWhereInput { Id = uniqueId.Id } }
-        );
-        var customer = customers.FirstOrDefault();
-        if (customer == null)
-        {
-            throw new NotFoundException();
-        }
-
-        return customer;
-    }
-
-    /// <summary>
     /// Update one customer
     /// </summary>
     public async Task UpdateCustomer(

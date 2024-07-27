@@ -36,7 +36,7 @@ public static class OrdersExtensions
         }
         if (updateDto.Customer != null)
         {
-            order.Customer = updateDto.Customer;
+            order.CustomerId = updateDto.Customer;
         }
 
         return order;

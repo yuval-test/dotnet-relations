@@ -116,11 +116,6 @@ public interface ICustomersService
     public Task<List<Customer>> Customers(CustomerFindManyArgs findManyArgs);
 
     /// <summary>
-    /// Get one customer
-    /// </summary>
-    public Task<Customer> Customer(CustomerWhereUniqueInput uniqueId);
-
-    /// <summary>
     /// Update one customer
     /// </summary>
     public Task UpdateCustomer(CustomerWhereUniqueInput uniqueId, CustomerUpdateInput updateDto);

@@ -41,10 +41,6 @@ public static class CustomersExtensions
         {
             customer.UpdatedAt = updateDto.UpdatedAt.Value;
         }
-        if (updateDto.Orders != null)
-        {
-            customer.Orders = updateDto.Orders.Value;
-        }
 
         return customer;
     }

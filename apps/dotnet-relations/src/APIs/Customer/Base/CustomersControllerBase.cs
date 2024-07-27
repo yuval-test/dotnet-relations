@@ -315,24 +315,6 @@ public abstract class CustomersControllerBase : ControllerBase
     }
 
     /// <summary>
-    /// Get one customer
-    /// </summary>
-    [HttpGet("{Id}")]
-    public async Task<ActionResult<Customer>> Customer(
-        [FromRoute()] CustomerWhereUniqueInput uniqueId
-    )
-    {
-        try
-        {
-            return await _service.Customer(uniqueId);
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
-    }
-
-    /// <summary>
     /// Update one customer
     /// </summary>
     [HttpPatch("{Id}")]
