@@ -11,4 +11,6 @@ public class OrderWhereInput
     public DateTime? Date { get; set; }
 
     public string? Customer { get; set; }
+
+    public List<string>? OrderItems { get; set; }
 }

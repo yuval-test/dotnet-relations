@@ -1,6 +1,6 @@
 namespace DotnetRelations.APIs.Dtos;
 
-public class Order
+public class OrderItem
 {
     public string Id { get; set; }
 
@@ -8,9 +8,9 @@ public class Order
 
     public DateTime UpdatedAt { get; set; }
 
-    public DateTime? Date { get; set; }
+    public string? Order { get; set; }
 
-    public string Customer { get; set; }
+    public int? Quantity { get; set; }
 
-    public List<string>? OrderItems { get; set; }
+    public double? Price { get; set; }
 }
