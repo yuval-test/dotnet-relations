@@ -13,4 +13,8 @@ public class OrderItem
     public int? Quantity { get; set; }
 
     public double? Price { get; set; }
+
+    public string Customer { get; set; }
+
+    public string? AnotherCustomer { get; set; }
 }

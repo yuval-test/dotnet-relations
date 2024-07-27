@@ -13,4 +13,8 @@ public class OrderItemCreateInput
     public int? Quantity { get; set; }
 
     public double? Price { get; set; }
+
+    public Customer Customer { get; set; }
+
+    public Customer? AnotherCustomer { get; set; }
 }

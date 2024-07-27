@@ -23,4 +23,8 @@ public class CustomerDbModel
     public string? Phone { get; set; }
 
     public List<OrderDbModel> Orders { get; set; } = new List<OrderDbModel>();
+
+    public List<OrderItemDbModel>? OrderItems { get; set; } = new List<OrderItemDbModel>();
+
+    public OrderItemDbModel? AnotherOrderItem { get; set; } = null;
 }
