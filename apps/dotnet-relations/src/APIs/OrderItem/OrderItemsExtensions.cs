@@ -41,9 +41,17 @@ public static class OrderItemsExtensions
         {
             orderItem.UpdatedAt = updateDto.UpdatedAt.Value;
         }
+        if (updateDto.Order != null)
+        {
+            orderItem.OrderId = updateDto.Order;
+        }
         if (updateDto.Customer != null)
         {
-            orderItem.Customer = updateDto.Customer;
+            orderItem.CustomerId = updateDto.Customer;
+        }
+        if (updateDto.AnotherCustomer != null)
+        {
+            orderItem.AnotherCustomerId = updateDto.AnotherCustomer;
         }
 
         return orderItem;
